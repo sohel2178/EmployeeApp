@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="@dimen/small_padding">
+
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:layout_height="@dimen/block_height">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/edit"
+                app:srcCompat="@drawable/edit"
+                style="@style/ProjectIcon"
+                android:layout_marginEnd="@dimen/default_margin"/>
+
+            <ImageView
+                android:id="@+id/delete"
+                style="@style/ProjectIcon"
+                app:srcCompat="@drawable/delete"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="@dimen/block_height"
+        android:layout_height="@dimen/block_height"
+        android:background="@color/statusColor"
+        android:gravity="center"
+        android:textSize="10sp"
+        android:textColor="@android:color/white"
+        android:id="@+id/designation"/>
+
+    <ImageView
+        android:layout_width="@dimen/block_height"
+        android:layout_height="@dimen/block_height"
+        android:id="@+id/image"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginStart="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/block_height">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:padding="@dimen/small_padding"
+                android:id="@+id/name"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                android:id="@+id/contact"/>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

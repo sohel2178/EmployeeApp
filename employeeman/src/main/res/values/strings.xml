@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">EmployeeMan</string>
+    <string name="employee_attendance">Employee Attendance</string>
+    <string name="worker_attendance">Worker Attendance</string>
+    <string name="search_user">Search User</string>
+    <string name="wages_rate_per_day">Wages Rate per Day</string>
+    <string name="over_time_rate_per_hour">Overtime Rate per hour</string>
+
+</resources>
