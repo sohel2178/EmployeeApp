@@ -27,29 +27,29 @@ import retrofit2.http.Path;
 
 public interface EmployeeClient {
 
-    @GET("/api/users/query/{query}")
+    @GET("/civil/api/users/query/{query}")
     Call<List<User>> getQueryUsers(@Path("query") String query);
 
-    @GET("/api/projects/{project_id}/employees")
+    @GET("/civil/api/projects/{project_id}/employees")
     Call<List<Employee>> getProjectEmployees(@Path("project_id") String projectId);
 
-    @POST("/api/projects/{project_id}/employees")
+    @POST("/civil/api/projects/{project_id}/employees")
     Call<Employee> addEmployee(@Path("project_id") String projectId,@Body Employee employee);
 
-    @PUT("/api/projects/{project_id}/employees/{employee_id}")
+    @PUT("/civil/api/projects/{project_id}/employees/{employee_id}")
     Call<Employee> updateEmployee(@Path("project_id") String project_id,@Path("employee_id") String employee_id,@Body Employee employee);
 
-    @DELETE("api/projects/{project_id}/employees/{employee_id}")
+    @DELETE("/civil/api/projects/{project_id}/employees/{employee_id}")
     Call<String> deleteEmployee(@Path("project_id") String project_id,@Path("employee_id") String employee_id);
 
-    @GET("/api/projects/{project_id}/employee_attendances/{year}/{month}")
+    @GET("/civil/api/projects/{project_id}/employee_attendances/{year}/{month}")
     Call<List<EmployeeAttendanceResponse>> getEmployeeMonthlyAttendance(
             @Path("project_id") String projectId,
             @Path("year") int year,
             @Path("month") int month
     );
 
-    @GET("/api/projects/{project_id}/employee_attendances/{year}/{month}/{day}")
+    @GET("/civil/api/projects/{project_id}/employee_attendances/{year}/{month}/{day}")
     Call<List<EmployeeAttendanceResponse>> getDailyEmployeeAttendance(
             @Path("project_id") String projectId,
             @Path("year") int year,
@@ -57,11 +57,11 @@ public interface EmployeeClient {
             @Path("day") int day
     );
 
-    @POST("/api/projects/{project_id}/employee_attendances")
+    @POST("/civil/api/projects/{project_id}/employee_attendances")
     Call<EmployeeAttendanceResponse> postEmployeeAttendance(@Body AttendanceBody body, @Path("project_id") String projectid);
 
 
-    @GET("/api/projects/{project_id}/employee_download/{year}/{month}")
+    @GET("/civil/api/projects/{project_id}/employee_download/{year}/{month}")
     Call<ResponseBody> getEmployeeMonthlyAttendanceFile(
             @Path("project_id") String projectId,
             @Path("year") int year,
@@ -69,7 +69,7 @@ public interface EmployeeClient {
     );
 
 
-    @GET("/api/projects/{project_id}/employees/attendances/{employee_id}/{year}/{month}")
+    @GET("/civil/api/projects/{project_id}/employees/attendances/{employee_id}/{year}/{month}")
     Call<List<Attendance>> getSingleEmployeeMonthlyAttendance(
             @Path("project_id") String projectId,
             @Path("employee_id") String employee_id,
@@ -84,25 +84,25 @@ public interface EmployeeClient {
 
 
 
-    @GET("/api/projects/{project_id}/workers")
+    @GET("/civil/api/projects/{project_id}/workers")
     Call<List<Worker>> getProjectWorkers(@Path("project_id") String projectId);
 
-    @POST("/api/projects/{project_id}/workers")
+    @POST("/civil/api/projects/{project_id}/workers")
     @Multipart
     Call<Worker> addWorker(@Path("project_id") String projectId,
                            @Part MultipartBody.Part file,
                            @PartMap() Map<String, RequestBody> partMap);
 
-    @PUT("/api/projects/{project_id}/workers/{worker_id}")
+    @PUT("/civil/api/projects/{project_id}/workers/{worker_id}")
     @Multipart
     Call<Worker> updateWorker(@Path("project_id") String projectId,@Path("worker_id") String workerId,
                               @Part MultipartBody.Part file,
                               @PartMap() Map<String, RequestBody> partMap);
 
-    @DELETE("/api/projects/{project_id}/workers/{worker_id}")
+    @DELETE("/civil/api/projects/{project_id}/workers/{worker_id}")
     Call<Worker> deleteWorker(@Path("project_id") String project_id,@Path("worker_id") String worker_id);
 
-    @GET("/api/projects/{project_id}/workers/attendances/{worker_id}/{year}/{month}")
+    @GET("/civil/api/projects/{project_id}/workers/attendances/{worker_id}/{year}/{month}")
     Call<List<Attendance>> getSingleWorkerMonthlyAttendance(
             @Path("project_id") String projectId,
             @Path("worker_id") String worker_id,
@@ -110,33 +110,33 @@ public interface EmployeeClient {
             @Path("month") int month
     );
 
-    @GET("/api/projects/{project_id}/attendances")
+    @GET("/civil/api/projects/{project_id}/attendances")
     Call<List<AttendanceResponse>> getAllAttendance(@Path("project_id") String projectId);
 
-    @GET("/api/attendance/{worker_id}")
+    @GET("/civil/api/attendance/{worker_id}")
     Call<List<Attendance>> getAttendances(@Path("worker_id") String workerId);
 
-    @GET("/api/projects/{project_id}/attendances/{year}/{month}")
+    @GET("/civil/api/projects/{project_id}/attendances/{year}/{month}")
     Call<List<AttendanceResponse>> getMonthlyAttendance(
             @Path("project_id") String projectId,
             @Path("year") int year,
             @Path("month") int month
     );
 
-    @GET("/api/projects/{project_id}/worker_download/{year}/{month}")
+    @GET("/civil/api/projects/{project_id}/worker_download/{year}/{month}")
     Call<ResponseBody> getWorkerMonthlyAttendanceFile(
             @Path("project_id") String projectId,
             @Path("year") int year,
             @Path("month") int month
     );
 
-    @POST("/api/projects/{project_id}/attendances")
+    @POST("/civil/api/projects/{project_id}/attendances")
     Call<AttendanceResponse> postAttendance(@Body AttendanceBody body, @Path("project_id") String projectid);
 
-    @GET("/api/projects/{project_id}/workers")
+    @GET("/civil/api/projects/{project_id}/workers")
     Call<List<Worker>> getAllWorkers(@Path("project_id") String projectId);
 
-    @GET("/api/projects/{project_id}/attendances/{year}/{month}/{day}")
+    @GET("/civil/api/projects/{project_id}/attendances/{year}/{month}/{day}")
     Call<List<AttendanceResponse>> getDailyAttendance(
             @Path("project_id") String projectId,
             @Path("year") int year,

@@ -20,7 +20,7 @@ public interface EmployeeAttendanceContract {
         void startAddEmployeeAttendanceActivity();
         void showDialog();
         void hideDialog();
-        void openDownloadedFile(String path);
+        void openFile(String path);
         void showToast(String path);
         void renderAdapter(List<EmployeeAttendanceResponse> attendanceResponseList);
         void startDailyAttendanceActivity(EmployeeAttendanceResponse attendanceResponse);

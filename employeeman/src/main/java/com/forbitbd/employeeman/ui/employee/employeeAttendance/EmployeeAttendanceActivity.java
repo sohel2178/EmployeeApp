@@ -110,10 +110,6 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
         hideProgressDialog();
     }
 
-    @Override
-    public void openDownloadedFile(String path) {
-        openFile(path);
-    }
 
     @Override
     public void showToast(String message) {
@@ -144,7 +140,10 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
 
     @Override
     public String saveFile(ResponseBody responseBody, int year, int month) {
-        return saveMonthlyAttendanceFile(project.getName(),"Employee",responseBody,year,month);
+        String monthStr = getResources().getStringArray(com.forbitbd.androidutils.R.array.month_array)[month];
+        String fileName = monthStr+" - "+year+ ".xlsx";
+
+        return saveTaskFile("Construction Manager",project.getName(),"Employees",fileName,responseBody);
     }
 
     @Override

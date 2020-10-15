@@ -84,7 +84,7 @@ public class EmployeeAttendancePresenter implements EmployeeAttendanceContract.P
                             String path = mView.saveFile(response.body(),year,month);
 
                             if(path!=null){
-                                mView.openDownloadedFile(path);
+                                mView.openFile(path);
                             }else{
                                 mView.showToast("Failed to Save the File");
                             }

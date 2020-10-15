@@ -125,9 +125,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> im
         }
 
         public void bind(User user){
-            Picasso.with(activity)
-                    .load((user.getImage()))
-                    .into(ivImage);
+            if(user.getImage()!=null && !user.getImage().equals("")){
+                Picasso.with(activity)
+                        .load((user.getImage()))
+                        .into(ivImage);
+            }
+
 
             tvName.setText(user.getName());
             tvContact.setText(user.getContact());

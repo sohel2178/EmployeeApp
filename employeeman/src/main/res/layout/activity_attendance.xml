@@ -56,7 +56,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            style="@style/Widget.AppCompat.Button.Colored"
+            android:textColor="@color/colorAccent"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/save"/>
 
     </RelativeLayout>

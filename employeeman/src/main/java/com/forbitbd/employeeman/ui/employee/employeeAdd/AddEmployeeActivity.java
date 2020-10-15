@@ -175,9 +175,14 @@ public class AddEmployeeActivity extends PrebaseActivity implements
 
     @Override
     public void bind() {
-        Picasso.with(getApplicationContext())
-                .load(employee.getImage())
-                .into(ivImage);
+
+        if(employee.getImage()!=null && !employee.getImage().equals("")){
+            Picasso.with(getApplicationContext())
+                    .load(employee.getImage())
+                    .into(ivImage);
+        }
+
+
 
         tvName.setText(employee.getName());
         tvContact.setText(employee.getContact_no());

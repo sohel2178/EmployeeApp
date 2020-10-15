@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -152,6 +153,15 @@ public class WorkerFragment extends EmployeeBaseFragment implements  WorkerContr
     }
 
     @Override
+    public void startZoomImageActivity(Worker worker) {
+        if(worker.getImage()==null){
+            Toast.makeText(getContext(), "Attachment Missing", Toast.LENGTH_SHORT).show();
+        }else{
+            get_activity().startZoomImageActivity(worker.getImage());
+        }
+    }
+
+    @Override
     public void startEditWorker(Worker worker) {
         get_activity().editWorker(worker);
     }
@@ -189,26 +199,5 @@ public class WorkerFragment extends EmployeeBaseFragment implements  WorkerContr
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         Log.d("HHHHHH",requestCode+"");
-
-       /* if(requestCode==REQUEST_CODE && resultCode== Activity.RESULT_OK){
-            Worker worker = (Worker) data.getSerializableExtra(Constant.WORKER);
-
-            if(worker!=null){
-                adapter.addWorker(worker);
-            }
-        }
-
-        if(requestCode==UPDATE_REQUEST_CODE && resultCode== Activity.RESULT_OK){
-            Worker worker = (Worker) data.getSerializableExtra(Constant.WORKER);
-            String status = data.getStringExtra(Constant.STATUS);
-            if(worker!=null){
-                if(status.equals(Constant.UPDATE)){
-                    adapter.updatewWorker(worker);
-                }else if(status.equals(Constant.DELETE)){
-                    adapter.deleteWorker(worker);
-                }
-
-            }
-        }*/
     }
 }

@@ -2,6 +2,7 @@ package com.forbitbd.employeeman.ui.employee.workerAttendance.attendance;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +70,7 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.At
     class AttendanceHolder extends RecyclerView.ViewHolder{
 
         ImageView ivImage;
-        TextView tvName,tvDesignation;
+        TextView tvName,tvDesignation,tvContact;
 
         RadioGroup radioGroup;
         EditText etOverTime;
@@ -80,6 +81,7 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.At
 
             tvName = itemView.findViewById(R.id.name);
             tvDesignation = itemView.findViewById(R.id.designation);
+            tvContact = itemView.findViewById(R.id.contact);
             ivImage = itemView.findViewById(R.id.image);
             etOverTime = itemView.findViewById(R.id.over_time);
 
@@ -127,7 +129,9 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.At
         }
 
         public void bind(Worker worker){
+            Log.d("HHHHHHHH",worker.getContact_no());
             tvName.setText(worker.getName());
+            tvContact.setText(worker.getContact_no());
             tvDesignation.setText(worker.getDesignation());
             Picasso.with(itemView.getContext())
                     .load(worker.getImage())

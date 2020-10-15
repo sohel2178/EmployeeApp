@@ -48,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="0dp"
+        android:padding="@dimen/small_padding"
         >
 
         <LinearLayout
@@ -61,20 +62,22 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_gravity="center_vertical"
                 android:text="@string/attendance"
                 android:textSize="@dimen/large_text_size"/>
             <RadioGroup
                 android:id="@+id/radio_group"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:orientation="horizontal">
 
                 <RadioButton
-                    android:layout_width="36dp"
+                    android:layout_width="wrap_content"
                     android:gravity="center"
-                    android:layout_height="36dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/radio_back"
                     android:padding="@dimen/medium_padding"
                     android:textColor="@color/radio_color"
@@ -84,8 +87,8 @@
                     android:text="P"/>
 
                 <RadioButton
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="@dimen/medium_padding"
                     android:background="@drawable/radio_back"
@@ -97,8 +100,8 @@
                     android:text="A"/>
 
                 <RadioButton
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="@dimen/medium_padding"
                     android:button="@android:color/transparent"

@@ -97,12 +97,12 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
 
     class EmployeeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ImageView ivImage,ivEdit,ivDelete;
+        ImageView ivAttach,ivEdit,ivDelete;
         TextView tvName,tvContact,tvDesignation;
 
         public EmployeeHolder(@NonNull View itemView) {
             super(itemView);
-            ivImage = itemView.findViewById(R.id.image);
+            ivAttach = itemView.findViewById(R.id.attach);
             ivEdit = itemView.findViewById(R.id.edit);
             ivDelete = itemView.findViewById(R.id.delete);
 
@@ -113,6 +113,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
             itemView.setOnClickListener(this);
             ivEdit.setOnClickListener(this);
             ivDelete.setOnClickListener(this);
+            ivAttach.setOnClickListener(this);
             //itemView.setOnLongClickListener(this);
         }
 
@@ -122,11 +123,6 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
             tvContact.setText(employee.getContact_no());
             tvDesignation.setText(employee.getDesignation());
 
-            if(employee.getImage()!= null && !employee.getImage().equals("")){
-                Picasso.with(fragment.getContext())
-                        .load(employee.getImage())
-                        .into(ivImage);
-            }
         }
 
         @Override
@@ -137,6 +133,8 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
                 fragment.startEditEmployeeActivity(employeeList.get(getAdapterPosition()));
             }else if(view==ivDelete){
                 fragment.showDeleteDialog(employeeList.get(getAdapterPosition()));
+            }else if(view==ivAttach){
+                fragment.startZoomImageActivity(employeeList.get(getAdapterPosition()));
             }
 
         }

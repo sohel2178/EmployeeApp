@@ -95,12 +95,12 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerHold
 
     class WorkerHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        ImageView ivImage,ivEdit,ivDelete;
+        ImageView ivAttach,ivEdit,ivDelete;
         TextView tvName,tvContact,tvDesignation;
 
         public WorkerHolder(@NonNull View itemView) {
             super(itemView);
-            ivImage = itemView.findViewById(R.id.image);
+            ivAttach = itemView.findViewById(R.id.attach);
             ivEdit = itemView.findViewById(R.id.edit);
             ivDelete = itemView.findViewById(R.id.delete);
 
@@ -112,6 +112,7 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerHold
             //itemView.setOnLongClickListener(this);
             ivEdit.setOnClickListener(this);
             ivDelete.setOnClickListener(this);
+            ivAttach.setOnClickListener(this);
         }
 
 
@@ -119,12 +120,6 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerHold
             tvName.setText(worker.getName());
             tvContact.setText(worker.getContact_no());
             tvDesignation.setText(worker.getDesignation());
-
-            if(worker.getImage()!= null && !worker.getImage().equals("")){
-                Picasso.with(fragment.getContext())
-                        .load(worker.getImage())
-                        .into(ivImage);
-            }
         }
 
         @Override
@@ -136,6 +131,8 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerHold
                 fragment.startEditWorker(workerList.get(getAdapterPosition()));
             }else  if(view==ivDelete){
                 fragment.showDeleteDialog(workerList.get(getAdapterPosition()));
+            }else if(view==ivAttach){
+                fragment.startZoomImageActivity(workerList.get(getAdapterPosition()));
             }
 
         }

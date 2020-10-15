@@ -134,6 +134,15 @@ public class EmployeeFragment extends EmployeeBaseFragment implements EmployeeCo
     }
 
     @Override
+    public void startZoomImageActivity(Employee employee) {
+        if(employee.getImage()==null){
+            Toast.makeText(getContext(), "Attachment Missing", Toast.LENGTH_SHORT).show();
+        }else{
+            get_activity().startZoomImageActivity(employee.getImage());
+        }
+    }
+
+    @Override
     public void showDeleteDialog(final Employee employee) {
         final DeleteDialog deleteDialog = new DeleteDialog();
         deleteDialog.setCancelable(false);

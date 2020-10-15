@@ -7,12 +7,18 @@
     android:layout_marginBottom="@dimen/small_padding">
 
     <RelativeLayout
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/block_height">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/attach"
+                app:srcCompat="@drawable/attach"
+                style="@style/ProjectIcon"
+                android:layout_marginEnd="@dimen/default_margin"/>
 
             <ImageView
                 android:id="@+id/edit"
@@ -37,10 +43,6 @@
         android:textColor="@android:color/white"
         android:id="@+id/designation"/>
 
-    <ImageView
-        android:layout_width="@dimen/block_height"
-        android:layout_height="@dimen/block_height"
-        android:id="@+id/image"/>
 
     <androidx.cardview.widget.CardView
         android:layout_marginStart="1dp"

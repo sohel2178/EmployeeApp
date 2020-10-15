@@ -26,6 +26,7 @@ public interface WorkerContract {
         void startAddAttendanceActivity(Project project);
         void startWorkerDetailActivity(Worker worker);
         void startSingleWorkerAttendanceAvtivity(Worker worker);
+        void startZoomImageActivity(Worker worker);
         void startEditWorker(Worker worker);
         void showDeleteDialog(Worker worker);
         void removeWorkerFromAdapter(Worker worker);

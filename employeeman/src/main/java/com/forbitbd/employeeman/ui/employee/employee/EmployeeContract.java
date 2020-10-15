@@ -26,6 +26,7 @@ public interface EmployeeContract {
         void startEmployeeDetailActivity(Employee employee);
         void startSingleEmployeeAttendanceActivity(Employee employee);
         void startEditEmployeeActivity(Employee employee);
+        void startZoomImageActivity(Employee employee);
         void showDeleteDialog(Employee employee);
         void updateEmployee(Employee employee);
         void removeEmployeeFromAdapter(String id);
