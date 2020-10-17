@@ -57,6 +57,8 @@ public class AddEmployeeActivity extends PrebaseActivity implements
     private void initView() {
         setupToolbar(R.id.toolbar);
 
+        setupBannerAd(R.id.adView);
+
         tiSalary = findViewById(R.id.ti_salary);
         tiDesignation = findViewById(R.id.ti_designation);
 

@@ -68,6 +68,8 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
     private void initView() {
         setupToolbar(R.id.toolbar);
 
+        setupBannerAd(R.id.adView);
+
         employeeFragment = new EmployeeFragment();
         workerFragment = new WorkerFragment();
 

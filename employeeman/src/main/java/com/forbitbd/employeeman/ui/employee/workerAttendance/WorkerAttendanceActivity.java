@@ -56,8 +56,6 @@ public class WorkerAttendanceActivity extends PrebaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worker_attendance);
         mPresenter = new WorkerAttendancePresenter(this);
-        /*this.worker = (Worker) getIntent().getSerializableExtra(Constant.WORKER);
-        mPresenter.requestForAttendances(worker);*/
         this.project = (Project) getIntent().getSerializableExtra(Constant.PROJECT);
 
         this.adapter = new AttendanceAdapter(this);
@@ -71,6 +69,8 @@ public class WorkerAttendanceActivity extends PrebaseActivity implements
     private void initView() {
         setupToolbar(R.id.toolbar);
         getSupportActionBar().setTitle(project.getName()+" | "+"Attendances");
+
+        setupBannerAd(R.id.adView);
 
         fabAdd = findViewById(R.id.fab_add);
         fabDownload = findViewById(R.id.fab_download);

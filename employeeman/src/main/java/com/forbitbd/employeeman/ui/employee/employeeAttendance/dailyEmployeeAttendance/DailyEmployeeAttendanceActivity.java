@@ -41,6 +41,8 @@ public class DailyEmployeeAttendanceActivity extends PrebaseActivity implements 
         setupToolbar(R.id.toolbar);
         getSupportActionBar().setTitle("Attendance On "+getDate());
 
+        setupBannerAd(R.id.adView);
+
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

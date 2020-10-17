@@ -46,9 +46,6 @@ public class AttendanceActivity extends PrebaseActivity implements AttendanceCon
         adapter = new AttendanceAdapter(this);
 
         initView();
-
-
-
     }
 
     @Override
@@ -59,6 +56,8 @@ public class AttendanceActivity extends PrebaseActivity implements AttendanceCon
 
     private void initView() {
         setupToolbar(R.id.toolbar);
+
+        setupBannerAd(R.id.adView);
 
         etDate = findViewById(R.id.date);
         etDate.setText(MyUtil.getStringDate(new Date()));

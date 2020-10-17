@@ -62,6 +62,7 @@ public class AddWorkerActivity extends PrebaseActivity implements AddWorkerContr
 
     private void initView() {
         setupToolbar(R.id.toolbar);
+        setupBannerAd(R.id.adView);
 
         tiName = findViewById(R.id.ti_name);
         tiContact = findViewById(R.id.ti_contact);

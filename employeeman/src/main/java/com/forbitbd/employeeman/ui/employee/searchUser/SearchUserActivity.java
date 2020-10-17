@@ -45,6 +45,8 @@ public class SearchUserActivity extends PrebaseActivity
         setupToolbar(R.id.toolbar);
         getSupportActionBar().setTitle(R.string.search_user);
 
+        setupBannerAd(R.id.adView);
+
         RecyclerView rvUsers = findViewById(R.id.rv_user);
         rvUsers.setLayoutManager(new LinearLayoutManager(this));
         rvUsers.setAdapter(adapter);

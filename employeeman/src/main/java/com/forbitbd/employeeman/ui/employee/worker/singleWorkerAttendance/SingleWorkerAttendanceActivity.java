@@ -71,6 +71,8 @@ public class SingleWorkerAttendanceActivity extends PrebaseActivity
         setupToolbar(R.id.toolbar);
         getSupportActionBar().setTitle(worker.getName().concat(" Attendance"));
 
+        setupBannerAd(R.id.adView);
+
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

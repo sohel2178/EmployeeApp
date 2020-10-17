@@ -69,6 +69,8 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
         setupToolbar(R.id.toolbar);
         getSupportActionBar().setTitle(project.getName()+" | "+"Attendances");
 
+        setupBannerAd(R.id.adView);
+
         fabAdd = findViewById(R.id.fab_add);
         fabDownload = findViewById(R.id.fab_download);
 

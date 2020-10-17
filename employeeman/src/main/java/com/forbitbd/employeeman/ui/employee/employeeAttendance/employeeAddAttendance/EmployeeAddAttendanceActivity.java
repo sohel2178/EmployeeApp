@@ -52,6 +52,8 @@ public class EmployeeAddAttendanceActivity extends PrebaseActivity implements Em
 
         setupToolbar(R.id.toolbar);
 
+        setupBannerAd(R.id.adView);
+
         etDate = findViewById(R.id.date);
         etDate.setText(MyUtil.getStringDate(new Date()));
         etDate.setOnClickListener(this);
