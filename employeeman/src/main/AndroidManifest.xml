@@ -11,18 +11,42 @@
     <application
         android:networkSecurityConfig="@xml/network_config">
 
-        <activity android:name=".ui.employee.EmployeeActivity"/>
-        <activity android:name=".ui.employee.employeeAdd.AddEmployeeActivity"/>
-        <activity android:name=".ui.employee.searchUser.SearchUserActivity"/>
-        <activity android:name=".ui.employee.workerAdd.AddWorkerActivity"/>
-        <activity android:name=".ui.employee.worker.singleWorkerAttendance.SingleWorkerAttendanceActivity"/>
-        <activity android:name=".ui.employee.workerAttendance.WorkerAttendanceActivity"/>
-        <activity android:name=".ui.employee.workerAttendance.attendance.AttendanceActivity"/>
-        <activity android:name=".ui.employee.workerAttendance.dailyWorkerAttendance.DailyWorkerAttendanceActivity"/>
-        <activity android:name=".ui.employee.employee.singleEmployeeAttendance.SingleEmployeeAttendanceActivity"/>
-        <activity android:name=".ui.employee.employeeAttendance.EmployeeAttendanceActivity"/>
-        <activity android:name=".ui.employee.employeeAttendance.employeeAddAttendance.EmployeeAddAttendanceActivity"/>
-        <activity android:name=".ui.employee.employeeAttendance.dailyEmployeeAttendance.DailyEmployeeAttendanceActivity"/>
+        <activity android:name=".ui.employee.EmployeeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.employee.employeeAdd.AddEmployeeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.employee.searchUser.SearchUserActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.employee.workerAdd.AddWorkerActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.employee.worker.singleWorkerAttendance.SingleWorkerAttendanceActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.employee.workerAttendance.WorkerAttendanceActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.employee.workerAttendance.attendance.AttendanceActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.employee.workerAttendance.dailyWorkerAttendance.DailyWorkerAttendanceActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.employee.employee.singleEmployeeAttendance.SingleEmployeeAttendanceActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.employee.employeeAttendance.EmployeeAttendanceActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.employee.employeeAttendance.employeeAddAttendance.EmployeeAddAttendanceActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.employee.employeeAttendance.dailyEmployeeAttendance.DailyEmployeeAttendanceActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
 
 
         <provider
