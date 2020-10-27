@@ -15,11 +15,11 @@ import androidx.annotation.Nullable;
 
 import com.forbitbd.androidutils.models.Project;
 import com.forbitbd.androidutils.models.User;
+import com.forbitbd.androidutils.ui.searchUser.SearchUserActivity;
 import com.forbitbd.androidutils.utils.Constant;
 import com.forbitbd.androidutils.utils.PrebaseActivity;
 import com.forbitbd.employeeman.R;
 import com.forbitbd.employeeman.models.Employee;
-import com.forbitbd.employeeman.ui.employee.searchUser.SearchUserActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
 

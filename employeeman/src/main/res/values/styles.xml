@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="WhiteCursorSearchView" parent="Widget.AppCompat.SearchView">
-        <item name="colorControlActivated">@android:color/white</item>
-        <item name="android:textColorHint">@color/light_grey</item>
-        <item name="android:editTextColor">@android:color/white</item>
-        <item name="android:fontFamily">@font/arima_madurai_medium</item>
-    </style>
+
 
     <style name="ProjectIcon">
         <item name="android:contentDescription">@string/update</item>
