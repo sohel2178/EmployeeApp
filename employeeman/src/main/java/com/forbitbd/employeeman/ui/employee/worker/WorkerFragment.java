@@ -43,7 +43,7 @@ public class WorkerFragment extends EmployeeBaseFragment implements  WorkerContr
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new WorkerAdapter(this);
+        adapter = new WorkerAdapter(this,getSharedProject().getEmployee());
         mPresenter = new WorkerPresenter(this);
     }
 

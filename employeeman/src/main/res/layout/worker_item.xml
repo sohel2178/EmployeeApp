@@ -30,6 +30,7 @@
                 android:id="@+id/delete"
                 style="@style/ProjectIcon"
                 app:srcCompat="@drawable/delete"
+                android:layout_marginEnd="@dimen/default_margin"
                 />
         </LinearLayout>
     </RelativeLayout>

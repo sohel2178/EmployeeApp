@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.forbitbd.androidutils.models.SharedProject;
 import com.forbitbd.employeeman.R;
 import com.forbitbd.employeeman.models.Worker;
 import com.squareup.picasso.Picasso;
@@ -23,11 +24,13 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerHold
     private WorkerFragment fragment;
     private List<Worker> workerList;
     private LayoutInflater inflater;
+    private SharedProject.Permission employeePermission;
 
-    public WorkerAdapter(WorkerFragment fragment) {
+    public WorkerAdapter(WorkerFragment fragment,SharedProject.Permission employeePermission) {
         this.fragment = fragment;
         this.workerList = new ArrayList<>();
         this.inflater = LayoutInflater.from(fragment.getContext());
+        this.employeePermission = employeePermission;
     }
 
     @NonNull
@@ -113,6 +116,18 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerHold
             ivEdit.setOnClickListener(this);
             ivDelete.setOnClickListener(this);
             ivAttach.setOnClickListener(this);
+
+            if(employeePermission.isUpdate()){
+                ivEdit.setVisibility(View.VISIBLE);
+            }else {
+                ivEdit.setVisibility(View.GONE);
+            }
+
+            if(employeePermission.isDelete()){
+                ivDelete.setVisibility(View.VISIBLE);
+            }else {
+                ivDelete.setVisibility(View.GONE);
+            }
         }
 
 

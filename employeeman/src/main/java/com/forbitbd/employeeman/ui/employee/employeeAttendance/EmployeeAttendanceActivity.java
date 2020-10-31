@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.forbitbd.androidutils.models.Project;
+import com.forbitbd.androidutils.models.SharedProject;
 import com.forbitbd.androidutils.utils.Constant;
 import com.forbitbd.androidutils.utils.PrebaseActivity;
 import com.forbitbd.employeeman.R;
@@ -39,7 +40,7 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
 
     private EmployeeAttendancePresenter mPresenter;
 
-    private Project project;
+    private SharedProject sharedProject;
     private EmployeeAttendanceAdapter adapter;
 
     private int currentMonth,currentYear;
@@ -55,7 +56,7 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
         mPresenter = new EmployeeAttendancePresenter(this);
         /*this.worker = (Worker) getIntent().getSerializableExtra(Constant.WORKER);
         mPresenter.requestForAttendances(worker);*/
-        this.project = (Project) getIntent().getSerializableExtra(Constant.PROJECT);
+        this.sharedProject = (SharedProject) getIntent().getSerializableExtra(Constant.PROJECT);
 
         this.adapter = new EmployeeAttendanceAdapter(this);
 
@@ -67,7 +68,7 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
 
     private void initView() {
         setupToolbar(R.id.toolbar);
-        getSupportActionBar().setTitle(project.getName()+" | "+"Attendances");
+        getSupportActionBar().setTitle(sharedProject.getProject().getName()+" | "+"Attendances");
 
         setupBannerAd(R.id.adView);
 
@@ -89,14 +90,21 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
         fabAdd.setOnClickListener(this);
         fabDownload.setOnClickListener(this);
 
-        mPresenter.getMonthlyEmployeeAttendance(project.get_id(),currentYear,currentMonth);
+        mPresenter.getMonthlyEmployeeAttendance(sharedProject.getProject().get_id(),currentYear,currentMonth);
+
+
+        if(sharedProject.getEmployee().isWrite()){
+            fabAdd.setVisibility(View.VISIBLE);
+        }else{
+            fabAdd.setVisibility(View.GONE);
+        }
     }
 
     @Override
     public void startAddEmployeeAttendanceActivity() {
         Intent intent = new Intent(getApplicationContext(), EmployeeAddAttendanceActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constant.PROJECT,project);
+        bundle.putSerializable(Constant.PROJECT,sharedProject.getProject());
         intent.putExtras(bundle);
         startActivityForResult(intent,REQUEST_CODE);
 
@@ -132,7 +140,7 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
     @Override
     public void startDailyAttendanceActivity(EmployeeAttendanceResponse attendanceResponse) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constant.PROJECT,project);
+        bundle.putSerializable(Constant.PROJECT,sharedProject.getProject());
         bundle.putSerializable(Constant.ATTENDANCE_RESPONSE,attendanceResponse);
 
         Intent intent = new Intent(getApplicationContext(), DailyEmployeeAttendanceActivity.class);
@@ -145,7 +153,7 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
         String monthStr = getResources().getStringArray(com.forbitbd.androidutils.R.array.month_array)[month];
         String fileName = monthStr+" - "+year+ ".xlsx";
 
-        return saveTaskFile("Construction Manager",project.getName(),"Employees",fileName,responseBody);
+        return saveTaskFile("Construction Manager",sharedProject.getProject().getName(),"Employees",fileName,responseBody);
     }
 
     @Override
@@ -157,10 +165,10 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
             requestFileAfterPermission();
         }else if(view==tvNext){
             increase();
-            mPresenter.getMonthlyEmployeeAttendance(project.get_id(),currentYear,currentMonth);
+            mPresenter.getMonthlyEmployeeAttendance(sharedProject.getProject().get_id(),currentYear,currentMonth);
         }else if(view==tvPrev){
             decrease();
-            mPresenter.getMonthlyEmployeeAttendance(project.get_id(),currentYear,currentMonth);
+            mPresenter.getMonthlyEmployeeAttendance(sharedProject.getProject().get_id(),currentYear,currentMonth);
         }
 
     }
@@ -181,7 +189,7 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
         String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
         if (EasyPermissions.hasPermissions(getApplicationContext(), perms)) {
             //sendDownloadRequest();
-            mPresenter.downloadMonthlyEmployeeAttendance(project.get_id(),currentYear,currentMonth);
+            mPresenter.downloadMonthlyEmployeeAttendance(sharedProject.getProject().get_id(),currentYear,currentMonth);
         } else {
             // Do not have permissions, request them now
             EasyPermissions.requestPermissions(this, "App need to Permission for Read and Write",

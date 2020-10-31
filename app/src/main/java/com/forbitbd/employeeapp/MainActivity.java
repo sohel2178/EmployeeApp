@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.forbitbd.androidutils.models.Project;
+import com.forbitbd.androidutils.models.SharedProject;
 import com.forbitbd.employeeman.ui.employee.EmployeeActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,13 +30,18 @@ public class MainActivity extends AppCompatActivity {
         project.setDescription("Construction Project");
         project.setUser("5ee221fdf127667cc70e13ed");
 
+        final SharedProject sharedProject = new SharedProject(project);
+        sharedProject.getEmployee().setWrite(false);
+        sharedProject.getEmployee().setUpdate(false);
+        sharedProject.getEmployee().setDelete(true);
+
         Button btnClickMe = findViewById(R.id.clickMe);
         btnClickMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), EmployeeActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("PROJECT",project);
+                bundle.putSerializable("PROJECT",sharedProject);
 
                 intent.putExtras(bundle);
 

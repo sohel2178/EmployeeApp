@@ -45,7 +45,7 @@ public class EmployeeFragment extends EmployeeBaseFragment implements EmployeeCo
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = new EmployeePresenter(this);
-        this.adapter = new EmployeeAdapter(this);
+        this.adapter = new EmployeeAdapter(this,getSharedProject().getEmployee());
     }
 
     @Override

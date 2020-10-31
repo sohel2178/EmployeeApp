@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 import com.forbitbd.androidutils.models.Project;
+import com.forbitbd.androidutils.models.SharedProject;
 import com.forbitbd.androidutils.utils.Constant;
 import com.forbitbd.androidutils.utils.PrebaseActivity;
 import com.forbitbd.androidutils.utils.ViewPagerAdapter;
@@ -33,7 +34,7 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
     private static final int UPDATE_WORKER=8000;
 
 
-    private Project project;
+    private SharedProject sharedProject;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private ViewPagerAdapter pagerAdapter;
@@ -49,7 +50,7 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee);
-        this.project = (Project) getIntent().getSerializableExtra(Constant.PROJECT);
+        this.sharedProject = (SharedProject) getIntent().getSerializableExtra(Constant.PROJECT);
 
         mPresenter = new EmpWorkerPresenter(this);
         initView();
@@ -57,12 +58,16 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
 
     @Override
     protected void onResume() {
-        setTitle(project.getName()+" | "+"Work Forces");
+        setTitle(sharedProject.getProject().getName()+" | "+"Work Forces");
         super.onResume();
     }
 
     public Project getProject(){
-        return this.project;
+        return this.sharedProject.getProject();
+    }
+
+    public SharedProject getSharedProject(){
+        return this.sharedProject;
     }
 
     private void initView() {
@@ -88,6 +93,14 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
         fabEmployee.setOnClickListener(this);
         fabWorkerAttendance.setOnClickListener(this);
         fabEmployeeAttendance.setOnClickListener(this);
+
+        if(sharedProject.getEmployee().isWrite()){
+            fabEmployee.setVisibility(View.VISIBLE);
+            fabWorker.setVisibility(View.VISIBLE);
+        }else{
+            fabEmployee.setVisibility(View.GONE);
+            fabWorker.setVisibility(View.GONE);
+        }
 
     }
 
@@ -122,7 +135,7 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
     public void startAddEmployeeActivity() {
         Intent intent = new Intent(this, AddEmployeeActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constant.PROJECT,project);
+        bundle.putSerializable(Constant.PROJECT,sharedProject.getProject());
         intent.putExtras(bundle);
         startActivityForResult(intent,ADD_EMPLOYEE);
     }
@@ -131,7 +144,7 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
     public void startAddWorkerActivity() {
          Intent intent = new Intent(this, AddWorkerActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constant.PROJECT,project);
+        bundle.putSerializable(Constant.PROJECT,sharedProject.getProject());
         intent.putExtras(bundle);
         startActivityForResult(intent,ADD_WORKER);
     }
@@ -140,7 +153,7 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
     public void startWorkerAttendanceActivity() {
         Intent intent = new Intent(this, WorkerAttendanceActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constant.PROJECT,project);
+        bundle.putSerializable(Constant.PROJECT,sharedProject);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -149,7 +162,7 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
     public void startEmployeeAttendanceActivity() {
         Intent intent = new Intent(this, EmployeeAttendanceActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constant.PROJECT,project);
+        bundle.putSerializable(Constant.PROJECT,sharedProject);
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -157,7 +170,7 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
     @Override
     public void editWorker(Worker worker) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constant.PROJECT,project);
+        bundle.putSerializable(Constant.PROJECT,sharedProject.getProject());
         bundle.putSerializable(Constant.WORKER,worker);
         Intent intent = new Intent(getApplicationContext(), AddWorkerActivity.class);
         intent.putExtras(bundle);
@@ -167,7 +180,7 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
     @Override
     public void startEditEmployeeActivity(Employee employee) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constant.PROJECT,project);
+        bundle.putSerializable(Constant.PROJECT,sharedProject.getProject());
         bundle.putSerializable(Constant.EMPLOYEE,employee);
         Intent intent = new Intent(getApplicationContext(), AddEmployeeActivity.class);
         intent.putExtras(bundle);
