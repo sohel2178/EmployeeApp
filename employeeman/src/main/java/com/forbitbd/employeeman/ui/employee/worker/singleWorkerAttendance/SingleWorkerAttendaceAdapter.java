@@ -62,6 +62,7 @@ public class SingleWorkerAttendaceAdapter extends RecyclerView.Adapter<SingleWor
 
         activity.renderOvertime(String.valueOf(overtimeTotal).concat(" Hrs"));
         activity.renderPresentCount(String.valueOf(presentCount).concat(" Days"));
+        activity.renderTotal(presentCount,overtimeTotal);
     }
 
     @Override

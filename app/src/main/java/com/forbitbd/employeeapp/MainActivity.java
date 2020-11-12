@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         project.setUser("5ee221fdf127667cc70e13ed");
 
         final SharedProject sharedProject = new SharedProject(project);
-        sharedProject.getEmployee().setWrite(false);
-        sharedProject.getEmployee().setUpdate(false);
+        sharedProject.getEmployee().setWrite(true);
+        sharedProject.getEmployee().setUpdate(true);
         sharedProject.getEmployee().setDelete(true);
 
         Button btnClickMe = findViewById(R.id.clickMe);

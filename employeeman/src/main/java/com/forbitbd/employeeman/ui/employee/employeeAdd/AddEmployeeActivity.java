@@ -2,7 +2,9 @@ package com.forbitbd.employeeman.ui.employee.employeeAdd;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,26 +19,32 @@ import com.forbitbd.androidutils.models.Project;
 import com.forbitbd.androidutils.models.User;
 import com.forbitbd.androidutils.ui.searchUser.SearchUserActivity;
 import com.forbitbd.androidutils.utils.Constant;
+import com.forbitbd.androidutils.utils.MyUtil;
 import com.forbitbd.androidutils.utils.PrebaseActivity;
 import com.forbitbd.employeeman.R;
 import com.forbitbd.employeeman.models.Employee;
 import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class AddEmployeeActivity extends PrebaseActivity implements
         AddEmployeeContract.View, View.OnClickListener {
 
     private static final int REQUEST_CODE =10000;
 
-    private TextInputLayout tiSalary,tiDesignation;
-    private EditText etSalary,etDesignation;
+    private TextInputLayout tiName,tiContact,tiSalary,tiDesignation;
+    private EditText etName,etContact,etSalary,etDesignation;
     private Button btnBrowse,btnSave;
+
     private ImageView ivImage;
-    private TextView tvName,tvContact;
 
     private AddEmployeePresenter mPresenter;
     private Project project;
     private Employee employee;
+    private byte[] bytes;
 
 
 
@@ -59,17 +67,19 @@ public class AddEmployeeActivity extends PrebaseActivity implements
 
         setupBannerAd(R.id.adView);
 
+        tiName = findViewById(R.id.ti_name);
+        tiContact = findViewById(R.id.ti_contact);
         tiSalary = findViewById(R.id.ti_salary);
         tiDesignation = findViewById(R.id.ti_designation);
 
         etSalary = findViewById(R.id.salary);
         etDesignation = findViewById(R.id.designation);
+        etName = findViewById(R.id.name);
+        etContact = findViewById(R.id.contact);
 
         ivImage = findViewById(R.id.image);
-        tvName = findViewById(R.id.name);
-        tvContact = findViewById(R.id.contact);
 
-        btnBrowse = findViewById(R.id.btn_select_employee);
+        btnBrowse = findViewById(R.id.browse);
         btnSave = findViewById(R.id.save);
 
         btnBrowse.setOnClickListener(this);
@@ -92,12 +102,13 @@ public class AddEmployeeActivity extends PrebaseActivity implements
     }
 
     @Override
-    public void startSearchUserActivity() {
-        Intent intent = new Intent(getApplicationContext(), SearchUserActivity.class);
+    public void startImagePicker() {
+        openCropImageActivity(true);
+        /*Intent intent = new Intent(getApplicationContext(), SearchUserActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constant.PROJECT,project);
         intent.putExtras(bundle);
-        startActivityForResult(intent,REQUEST_CODE);
+        startActivityForResult(intent,REQUEST_CODE);*/
     }
 
     @Override
@@ -115,9 +126,17 @@ public class AddEmployeeActivity extends PrebaseActivity implements
         }
 
         this.employee.setDesignation(etDesignation.getText().toString().trim());
+        this.employee.setName(etName.getText().toString().trim());
+        this.employee.setContact(etContact.getText().toString().trim());
 
         boolean valid = mPresenter.validate(employee);
         if(!valid) {
+            return;
+        }
+
+
+        if(ivImage.getDrawable()==null){
+            Toast.makeText(this, "Browse to Select an Employee Photo", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -125,9 +144,9 @@ public class AddEmployeeActivity extends PrebaseActivity implements
             Toast.makeText(this, "Turn on Your Internet Connection to Perform this Operations", Toast.LENGTH_SHORT).show();
         }else{
             if(employee.get_id()==null){
-                mPresenter.saveEmployee(employee);
+                mPresenter.saveEmployee(employee,bytes);
             }else{
-                mPresenter.updateEmployee(employee);
+                mPresenter.updateEmployee(employee,bytes);
             }
 
         }
@@ -138,12 +157,23 @@ public class AddEmployeeActivity extends PrebaseActivity implements
     public void clearPreError() {
         tiSalary.setErrorEnabled(false);
         tiDesignation.setErrorEnabled(false);
+        tiName.setErrorEnabled(false);
+        tiContact.setErrorEnabled(false);
     }
 
     @Override
     public void showValidationError(String message, int fieldId) {
 
         switch (fieldId) {
+            case 1:
+                etName.requestFocus();
+                tiName.setError(message);
+                break;
+
+            case 2:
+                etContact.requestFocus();
+                tiContact.setError(message);
+                break;
             case 4:
                 etSalary.requestFocus();
                 tiSalary.setError(message);
@@ -159,7 +189,6 @@ public class AddEmployeeActivity extends PrebaseActivity implements
 
     @Override
     public void finishedAndSendEmployee(Employee employee) {
-        Log.d("HHHHHHHH","finishedAndSendEmployee Called");
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
         bundle.putSerializable(Constant.EMPLOYEE,employee);
@@ -185,11 +214,10 @@ public class AddEmployeeActivity extends PrebaseActivity implements
         }
 
 
+        etName.setText(employee.getName());
+        etContact.setText(employee.getContact());
 
-        tvName.setText(employee.getName());
-        tvContact.setText(employee.getContact_no());
-
-        btnBrowse.setVisibility(View.GONE);
+        //btnBrowse.setVisibility(View.GONE);
 
         etDesignation.setText(employee.getDesignation());
         etSalary.setText(String.valueOf(employee.getSalary()));
@@ -209,17 +237,24 @@ public class AddEmployeeActivity extends PrebaseActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
-       if(requestCode==REQUEST_CODE && resultCode==RESULT_OK){
-           User user = (User) data.getSerializableExtra(Constant.USER);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), result.getUri());
+                    Bitmap scaledBitMap = MyUtil.getScaledBitmap(bitmap,200,200);
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    scaledBitMap.compress(Bitmap.CompressFormat.JPEG, 80 /*ignored for PNG*/, bos);
+                    bytes = bos.toByteArray();
+                    ivImage.setImageBitmap(scaledBitMap);
 
-           if(user!=null){
-               if(employee== null){
-                   employee = new Employee();
-               }
-               employee.setUser(user);
-               mPresenter.bind();
-               btnSave.setText(getString(R.string.save));
-           }
-       }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+            }
+        }
     }
 }

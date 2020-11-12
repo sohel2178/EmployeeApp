@@ -17,6 +17,7 @@ public interface SingleWorkerAttendanceContract {
         void renderOvertime(String overtimeTotal);
         void renderPresentCount(String presentCount);
         void renderAdapter(List<Attendance> attendanceList);
+        void renderTotal(int presentCount,int overtime);
         void updateState();
     }
 }

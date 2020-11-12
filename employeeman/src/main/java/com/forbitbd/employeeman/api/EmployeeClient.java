@@ -34,10 +34,16 @@ public interface EmployeeClient {
     Call<List<Employee>> getProjectEmployees(@Path("project_id") String projectId);
 
     @POST("/civil/api/projects/{project_id}/employees")
-    Call<Employee> addEmployee(@Path("project_id") String projectId,@Body Employee employee);
+    @Multipart
+    Call<Employee> addEmployee(@Path("project_id") String projectId,
+                               @Part MultipartBody.Part file,
+                               @PartMap() Map<String, RequestBody> partMap);
 
     @PUT("/civil/api/projects/{project_id}/employees/{employee_id}")
-    Call<Employee> updateEmployee(@Path("project_id") String project_id,@Path("employee_id") String employee_id,@Body Employee employee);
+    @Multipart
+    Call<Employee> updateEmployee(@Path("project_id") String projectId,@Path("employee_id") String employeeID,
+                                  @Part MultipartBody.Part file,
+                                  @PartMap() Map<String, RequestBody> partMap);
 
     @DELETE("/civil/api/projects/{project_id}/employees/{employee_id}")
     Call<String> deleteEmployee(@Path("project_id") String project_id,@Path("employee_id") String employee_id);

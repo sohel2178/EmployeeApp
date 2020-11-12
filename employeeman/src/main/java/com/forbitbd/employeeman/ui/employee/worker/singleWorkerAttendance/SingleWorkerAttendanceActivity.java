@@ -36,7 +36,7 @@ public class SingleWorkerAttendanceActivity extends PrebaseActivity
     private SingleWorkerAttendaceAdapter adapter;
 
     private int currentMonth,currentYear;
-    private TextView tvStatus,tvPresent,tvOvertime,tvState,tvNext,tvPrev;
+    private TextView tvStatus,tvPresent,tvOvertime,tvState,tvNext,tvPrev,tvTotal;
 
     private CardView mCardTop,mCardBottom;
     private RelativeLayout mBootomContainer,mTopContainer,mRecyclerContainer;
@@ -88,6 +88,7 @@ public class SingleWorkerAttendanceActivity extends PrebaseActivity
         tvPresent = findViewById(R.id.present);
         tvOvertime = findViewById(R.id.over_time);
         tvIndicator = findViewById(R.id.indicator);
+        tvTotal = findViewById(R.id.total);
         tvNext = findViewById(R.id.next);
         tvPrev = findViewById(R.id.prev);
 
@@ -250,6 +251,12 @@ public class SingleWorkerAttendanceActivity extends PrebaseActivity
         tvStatus.setText(getDate());
 
         adapter.updateAdapter(attendanceList);
+    }
+
+    @Override
+    public void renderTotal(int presentCount, int overtime) {
+        double total = presentCount*worker.getWages_rate_per_day()+overtime*worker.getOver_time_rate_per_hour();
+        tvTotal.setText(String.valueOf(total));
     }
 
     @Override

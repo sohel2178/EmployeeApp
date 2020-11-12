@@ -10,7 +10,9 @@ public class Employee implements Serializable {
     private String _id;
     private String designation;
     private String project;
-    private User user;
+    private String name;
+    private String contact;
+    private String image;
     private Date created_at;
     private int status;
     private double salary;
@@ -27,10 +29,6 @@ public class Employee implements Serializable {
         this._id = _id;
     }
 
-    public String getName() {
-        return user.getName();
-    }
-
 
     public String getDesignation() {
         return designation;
@@ -40,14 +38,7 @@ public class Employee implements Serializable {
         this.designation = designation;
     }
 
-    public String getContact_no() {
-        return this.user.getContact();
-    }
 
-
-    public String getImage() {
-        return user.getImage();
-    }
 
 
     public String getProject() {
@@ -84,11 +75,28 @@ public class Employee implements Serializable {
         this.salary = salary;
     }
 
-    public User getUser() {
-        return user;
+
+    public String getName() {
+        return name;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

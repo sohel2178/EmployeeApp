@@ -8,14 +8,14 @@ public interface AddEmployeeContract {
     interface Presenter{
         void browseClick();
         boolean validate(Employee employee);
-        void saveEmployee(Employee employee);
-        void updateEmployee(Employee employee);
+        void saveEmployee(Employee employee,byte[] bytes);
+        void updateEmployee(Employee employee,byte[] bytes);
         void checkAndSave();
         void bind();
     }
 
     interface View{
-        void startSearchUserActivity();
+        void startImagePicker();
         void checkAndSave();
         void clearPreError();
         void showValidationError(String message, int fieldId);

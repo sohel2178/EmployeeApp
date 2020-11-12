@@ -135,7 +135,7 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
 
         public void bind(Employee employee){
             tvName.setText(employee.getName());
-            tvContact.setText(employee.getContact_no());
+            tvContact.setText(employee.getContact());
             tvDesignation.setText(employee.getDesignation());
 
         }

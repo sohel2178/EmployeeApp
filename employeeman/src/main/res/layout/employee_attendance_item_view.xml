@@ -14,7 +14,7 @@
 
         <ImageView
             android:layout_width="56dp"
-            android:layout_height="match_parent"
+            android:layout_height="56dp"
             android:id="@+id/image"/>
 
         <TextView
@@ -24,7 +24,7 @@
             android:textColor="@android:color/white"
             android:textSize="10sp"
             android:layout_width="56dp"
-            android:layout_height="match_parent"
+            android:layout_height="56dp"
             android:background="@color/statusColor"/>
 
         <androidx.cardview.widget.CardView
