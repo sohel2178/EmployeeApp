@@ -129,13 +129,21 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.At
         }
 
         public void bind(Worker worker){
-            Log.d("HHHHHHHH",worker.getContact_no());
             tvName.setText(worker.getName());
             tvContact.setText(worker.getContact_no());
             tvDesignation.setText(worker.getDesignation());
             Picasso.with(itemView.getContext())
                     .load(worker.getImage())
                     .into(ivImage);
+
+            //radioGroup.check();
+            if(worker.getStatus()==0){
+                radioGroup.check(R.id.present);
+            }else if(worker.getStatus()==1){
+                radioGroup.check(R.id.absent);
+            }else if(worker.getStatus()==2){
+                radioGroup.check(R.id.leave);
+            }
         }
     }
 }

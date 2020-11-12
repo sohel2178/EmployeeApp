@@ -128,6 +128,14 @@ public class EmployeeAddAttendanceAdapter extends RecyclerView.Adapter<EmployeeA
             Picasso.with(itemView.getContext())
                     .load(employee.getImage())
                     .into(ivImage);
+
+            if(employee.getStatus()==0){
+                radioGroup.check(R.id.present);
+            }else if(employee.getStatus()==1){
+                radioGroup.check(R.id.absent);
+            }else if(employee.getStatus()==2){
+                radioGroup.check(R.id.leave);
+            }
         }
     }
 }
