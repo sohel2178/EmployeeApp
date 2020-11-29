@@ -10,6 +10,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.forbitbd.androidutils.models.Project;
 import com.forbitbd.androidutils.models.SharedProject;
+import com.forbitbd.androidutils.utils.AppPreference;
 import com.forbitbd.androidutils.utils.Constant;
 import com.forbitbd.androidutils.utils.PrebaseActivity;
 import com.forbitbd.androidutils.utils.ViewPagerAdapter;
@@ -58,8 +59,12 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
 
     @Override
     protected void onResume() {
-        setTitle(sharedProject.getProject().getName()+" | "+"Work Forces");
+
         super.onResume();
+        setTitle(sharedProject.getProject().getName()+" | "+"Work Forces");
+        if(AppPreference.getInstance(this).getCounter()>Constant.COUNTER){
+            showInterAd();
+        }
     }
 
     public Project getProject(){
@@ -104,6 +109,8 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
 
     }
 
+
+
     private void setupViewPager(ViewPager viewPager) {
 
         if(pagerAdapter==null){
@@ -120,6 +127,7 @@ public class EmployeeActivity extends PrebaseActivity implements EmpWorkerContra
 
     @Override
     public void onClick(View v) {
+        AppPreference.getInstance(this).increaseCounter();
         if(v==fabEmployee){
             mPresenter.startAddEmployeeActivity();
         }else if(v==fabWorker){

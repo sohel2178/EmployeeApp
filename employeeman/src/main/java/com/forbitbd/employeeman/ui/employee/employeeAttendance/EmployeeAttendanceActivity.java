@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.forbitbd.androidutils.models.Project;
 import com.forbitbd.androidutils.models.SharedProject;
+import com.forbitbd.androidutils.utils.AppPreference;
 import com.forbitbd.androidutils.utils.Constant;
 import com.forbitbd.androidutils.utils.PrebaseActivity;
 import com.forbitbd.employeeman.R;
@@ -101,6 +102,14 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if(AppPreference.getInstance(this).getCounter()>Constant.COUNTER){
+            showInterAd();
+        }
+    }
+
+    @Override
     public void startAddEmployeeAttendanceActivity() {
         Intent intent = new Intent(getApplicationContext(), EmployeeAddAttendanceActivity.class);
         Bundle bundle = new Bundle();
@@ -161,6 +170,7 @@ public class EmployeeAttendanceActivity extends PrebaseActivity implements
 
         if(view==fabAdd){
             mPresenter.startAddAttendanceActivity();
+            AppPreference.getInstance(this).increaseCounter();
         }else if(view==fabDownload){
             requestFileAfterPermission();
         }else if(view==tvNext){

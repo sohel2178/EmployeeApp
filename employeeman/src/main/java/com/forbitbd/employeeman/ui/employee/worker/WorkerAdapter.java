@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.forbitbd.androidutils.models.SharedProject;
+import com.forbitbd.androidutils.utils.AppPreference;
 import com.forbitbd.employeeman.R;
 import com.forbitbd.employeeman.models.Worker;
 import com.squareup.picasso.Picasso;
@@ -140,11 +141,13 @@ public class WorkerAdapter extends RecyclerView.Adapter<WorkerAdapter.WorkerHold
         @Override
         public void onClick(View view) {
             if(view==itemView){
+                AppPreference.getInstance(view.getContext()).increaseCounter();
                 fragment.startSingleWorkerAttendanceAvtivity(workerList.get(getAdapterPosition()));
             }else  if(view==ivEdit){
-                Log.d("KKKKKK","CALL EDIT");
+                AppPreference.getInstance(view.getContext()).increaseCounter();
                 fragment.startEditWorker(workerList.get(getAdapterPosition()));
             }else  if(view==ivDelete){
+                AppPreference.getInstance(view.getContext()).increaseCounter();
                 fragment.showDeleteDialog(workerList.get(getAdapterPosition()));
             }else if(view==ivAttach){
                 fragment.startZoomImageActivity(workerList.get(getAdapterPosition()));

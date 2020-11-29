@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.forbitbd.androidutils.models.SharedProject;
+import com.forbitbd.androidutils.utils.AppPreference;
 import com.forbitbd.employeeman.R;
 import com.forbitbd.employeeman.models.Employee;
 import com.squareup.picasso.Picasso;
@@ -143,10 +144,13 @@ public class EmployeeAdapter extends RecyclerView.Adapter<EmployeeAdapter.Employ
         @Override
         public void onClick(View view) {
             if(view==itemView){
+                AppPreference.getInstance(view.getContext()).increaseCounter();
                 fragment.startSingleEmployeeAttendanceActivity(employeeList.get(getAdapterPosition()));
             }else if(view==ivEdit){
+                AppPreference.getInstance(view.getContext()).increaseCounter();
                 fragment.startEditEmployeeActivity(employeeList.get(getAdapterPosition()));
             }else if(view==ivDelete){
+                AppPreference.getInstance(view.getContext()).increaseCounter();
                 fragment.showDeleteDialog(employeeList.get(getAdapterPosition()));
             }else if(view==ivAttach){
                 fragment.startZoomImageActivity(employeeList.get(getAdapterPosition()));

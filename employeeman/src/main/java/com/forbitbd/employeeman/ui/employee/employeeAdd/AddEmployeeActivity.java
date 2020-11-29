@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import com.forbitbd.androidutils.models.Project;
 import com.forbitbd.androidutils.models.User;
 import com.forbitbd.androidutils.ui.searchUser.SearchUserActivity;
+import com.forbitbd.androidutils.utils.AppPreference;
 import com.forbitbd.androidutils.utils.Constant;
 import com.forbitbd.androidutils.utils.MyUtil;
 import com.forbitbd.androidutils.utils.PrebaseActivity;
@@ -97,6 +98,10 @@ public class AddEmployeeActivity extends PrebaseActivity implements
             setTitle("Employee Update Form");
         }else{
             setTitle("Employee Entry Form");
+        }
+
+        if(AppPreference.getInstance(this).getCounter()>Constant.COUNTER){
+            showInterAd();
         }
 
     }

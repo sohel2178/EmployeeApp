@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import com.forbitbd.androidutils.dialog.DatePickerListener;
 import com.forbitbd.androidutils.dialog.MyDatePickerFragment;
 import com.forbitbd.androidutils.models.Project;
+import com.forbitbd.androidutils.utils.AppPreference;
 import com.forbitbd.androidutils.utils.Constant;
 import com.forbitbd.androidutils.utils.MyUtil;
 import com.forbitbd.androidutils.utils.PrebaseActivity;
@@ -101,6 +102,10 @@ public class AddWorkerActivity extends PrebaseActivity implements AddWorkerContr
             setTitle("Worker Entry Form");
         }else{
             setTitle("Worker update Form");
+        }
+
+        if(AppPreference.getInstance(this).getCounter()>Constant.COUNTER){
+            showInterAd();
         }
     }
 
